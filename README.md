@@ -1,6 +1,6 @@
 # Weather-Watcher
 
-![Link to Deployed Site](https://jamiethomason.github.io/Weather-Watcher/)
+[Link to Deployed Site](https://jamiethomason.github.io/Weather-Watcher/)
 
 ## Process:
 
@@ -15,7 +15,8 @@
 3. Format 5-Day Forecast to be next to each other.
 4. Add in icons for forecast.
 5. Add time to Current Forecast.
+6. Hide "5-Day Forecast" until needed.
 
 ## Deployed Site Image:
 
-![Deployed Site]()
+![Deployed Site](./assets/Screen%20Shot%202022-07-14%20at%2010.21.15%20PM.png)
