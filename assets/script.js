@@ -1,6 +1,6 @@
 var nameInputEl = document.querySelector("#city");
 var userFormEl = document.querySelector("#user-form");
-var apiUrl = "http://api.openweathermap.org/" + value;
+var apiUrl = "http://api.openweathermap.org/";
 var currCityData = document.querySelector("#currcity-container");
 var fiveDayData = document.querySelector("#five-container");
 
@@ -10,34 +10,35 @@ var fiveDayData = document.querySelector("#five-container");
 // this function grabs the value of the input element;
 // add input value to query url
 // hit fetch request
-//Open weather API key: 077d9b62f9b77d50803e4072a52edcaa
+// Open weather API key: 077d9b62f9b77d50803e4072a52edcaa
 // wait for response, then dynamically add to screen
 // save search value in localstorage
+// display saved values on page
 
 //Input City Name
 
 var formSubmitHandler = function(event) {
+    event.preventDefault();
     var cityName = nameInputEl.value.trim();
     if (cityName) {
-      getCityData(cityName);
-      nameInputEl.value = "";
+        getLatLonData(cityName);
+        nameInputEl.value = "";
     } else {
       alert("Please enter a city name");
     }
 };
-
-//Submit Button
   
 
 //Get Lat/Long API
 
-var getLatLonData = function(user) {
-    "https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={077d9b62f9b77d50803e4072a52edcaa}";
+var getLatLonData = function(city) {
+    "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid=077d9b62f9b77d50803e4072a52edcaa";
+    var cityLat = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=077d9b62f9b77d50803e4072a52edcaa";
 
-fetch(apiUrl).then(function(res) {
+fetch(cityLat).then(function(res) {
     return res.json()
 }).then(function(data) {
-    console.log(data);
+    getCityData(data[0].lat, data[0].lon)
 }).catch(function(err) {
     console.log(err);
 })
@@ -46,10 +47,10 @@ fetch(apiUrl).then(function(res) {
 
 //Current Data API
 
-var currCityData= function(user) {
-    "http://api.openweathermap.org/geo/1.0/direct?q={city name},{state code},{country code}&limit={limit}&appid={A077d9b62f9b77d50803e4072a52edcaa}";
+var getCityData = function(lat, lon) {
+    var cityDataURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=077d9b62f9b77d50803e4072a52edcaa";
 
-fetch(apiUrl).then(function(res) {
+fetch(cityDataURL).then(function(res) {
     return res.json()
 }).then(function(data) {
     console.log(data);
@@ -74,16 +75,16 @@ fetch(apiUrl).then(function(res) {
 
 };
 
-
-//Load and Save Search Value
-
-var loadCity = function() {
-    cityName = JSON.parse(localStorage.getItem("cityName"));
-};
+//Save Search Values
 
 var saveCity = function() {
     localStorage.setItem("cityName", JSON.stringify(cityName));
 };
 
+//Load Search Value (needs to be in button form)
+
+var loadCity = function() {
+    cityName = JSON.parse(localStorage.getItem("cityName"));
+};
 
 userFormEl.addEventListener("submit", formSubmitHandler);
