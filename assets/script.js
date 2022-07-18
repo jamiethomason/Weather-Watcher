@@ -30,6 +30,10 @@ var formSubmitHandler = function (event) {
     } else {
         alert("Please enter a city name");
     }
+
+    // Spread Operator
+    buttonCreator(cityArray);
+
 };
 
 
@@ -69,6 +73,7 @@ var getCityData = function (lat, lon) {
 //Current Day Display
 
 var currDisplay = function (data) {
+    currCityData.innerHTML = ""; // clearing
     var currDisplayList = document.createElement("ul");
     var currDisplayName = document.createElement("li");
     var currDisplayTemp = document.createElement("li");
@@ -94,6 +99,7 @@ var currDisplay = function (data) {
 //5-Day Data API
 
 var fiveDisplay = function (data) {
+    fiveDayData.innerHTML = "";
     for (let i = 0; i < 5; i++) {
         var fiveForecast = document.createElement("div");
         fiveForecast.setAttribute("class", "col-4");
@@ -120,16 +126,24 @@ var fiveDisplay = function (data) {
 };
 
 var buttonCreator = function (saveData) {
-    if (saveData > 0) {
-        for (let i = 0; i < array.length; i++) {
-            const element = array[i];
+
+    buttonStorage.innerHTML = "";
+    if (saveData.length > 0) {
+        for (let i = 0; i < saveData.length; i++) {
+            const element = saveData[i];
             var button = document.createElement("button");
-            button.textContent = saveData[i].cityName;
+            button.textContent = saveData[i];
             buttonStorage.appendChild(button);
+            button.onclick = function() {
+                cityName = saveData[i];
+                getLatLonData(saveData[i]);
+            }
         }
     }
 
 };
+
+// getLatLonData(cityName);
 
 //Save Search Values
 
@@ -141,9 +155,10 @@ var saveCity = function (city) {
 //Load Search Value (needs to be in button form)
 
 var loadCity = function () {
-    cityName = JSON.parse(localStorage.getItem("cityName"));
-    buttonCreator(cityName);
+    cityArray = JSON.parse(localStorage.getItem("cityName"));
+    buttonCreator(cityArray);
 };
 
 userFormEl.addEventListener("submit", formSubmitHandler);
 loadCity()
+
