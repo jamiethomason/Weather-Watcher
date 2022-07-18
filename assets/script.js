@@ -1,6 +1,6 @@
 var nameInputEl = document.querySelector("#city");
 var userFormEl = document.querySelector("#user-form");
-var apiUrl = "http://api.openweathermap.org/";
+var apiUrl = "https://api.openweathermap.org/";
 var currCityData = document.querySelector("#currcity-container");
 var fiveDayData = document.querySelector("#five-container");
 var cityName = ""
