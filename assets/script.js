@@ -37,7 +37,7 @@ var formSubmitHandler = function (event) {
 
 var getLatLonData = function (city) {
     "https://api.openweathermap.org/data/2.5/onecall?lat={lat}&lon={lon}&appid=077d9b62f9b77d50803e4072a52edcaa";
-    var cityLat = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=077d9b62f9b77d50803e4072a52edcaa";
+    var cityLat = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=077d9b62f9b77d50803e4072a52edcaa";
 
     fetch(cityLat).then(function (res) {
         return res.json()
