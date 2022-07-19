@@ -132,6 +132,7 @@ var buttonCreator = function (saveData) {
         for (let i = 0; i < saveData.length; i++) {
             const element = saveData[i];
             var button = document.createElement("button");
+            button.setAttribute("class", "d-block mx-auto col-4")
             button.textContent = saveData[i];
             buttonStorage.appendChild(button);
             button.onclick = function() {
